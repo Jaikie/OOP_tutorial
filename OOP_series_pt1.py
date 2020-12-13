@@ -17,14 +17,24 @@ class Employee:
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amt)
 
-    @classmethod
-    def set_raise_amt(cls, amount):
-        cls.raise_amt = amount
+    def __repr__(self):
+        return "Employee('{}', '{}', '{}')".format(self.first, self.last, self.pay)
 
-    @classmethod
-    def from_string(cls, emp_str):
-        first, last, pay = emp_str.split('-')
-        return cls(first, last, pay)
+    def __str__(self):
+        return '{} - {}'.format(self.fullname(), self.email)
+
+    def __add__(self, other):
+        return self.pay + other.pay
+
+    
+    # @classmethod
+    # def set_raise_amt(cls, amount):
+    #     cls.raise_amt = amount
+
+    # @classmethod
+    # def from_string(cls, emp_str):
+    #     first, last, pay = emp_str.split('-')
+    #     return cls(first, last, pay)
 
     @staticmethod
     def is_workday(day):
@@ -32,11 +42,7 @@ class Employee:
             return False
         return True
 
-emp_1 = Employee('Jake', 'Sanderson', 25000)
-emp_2 = Employee('Test', 'User', 60000)
+emp_1 = Employee('Jake', 'Sanderson', 50000)
+emp_2 = Employee('Alex', 'Suhr', 60000)
 
-import datetime
-
-my_date = datetime.date(2016, 7, 11)
-
-print(Employee.is_workday(my_date))
+print(emp_1 + emp_2)
